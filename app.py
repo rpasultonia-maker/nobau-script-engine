@@ -117,17 +117,15 @@ current_hook = sample_hooks.get(video_num, '"Muka pas-pasan, penampilan biasa...
 current_script = sample_scripts.get(video_num, '"Emang bener-bener susah dibilangin. Muka biasa aja gak apa, yang penting helm & apparel lu tetep wangi segar NOBAU DeoFresh biar bebas ilfeel!"')
 current_broll = sample_brolls.get(video_num, 'Kamera POV: Tangan peragakan semprot NOBAU ke objek produk.')
 
-# Render Tampilan Teleprompter yang Aman Tanpa Error HTML
+# Render Tampilan Teleprompter
 st.subheader("📌 HOOK TEKS LAYAR (0-3 DETIK)")
 st.warning(current_hook)
 
 st.subheader("🗣️ SKRIP TELEPROMPTER (BACA DI KAMERA)")
 st.success(current_script)
 
+st.subheader("📋 COPY TEKS SKRIP DI BAWAH INI")
+st.code(current_script, language=None)
+
 st.subheader("📹 PANDUAN B-ROLL KAMERA BELAKANG")
 st.info(current_broll)
-
-st.divider()
-
-# Quick Copy Helper
-st.text_copy_button("📋 Copy Teks Skrip Ini", current_script, use_container_width=True)
