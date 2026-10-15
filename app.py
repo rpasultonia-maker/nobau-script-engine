@@ -37,77 +37,6 @@ st.markdown("""
         margin-bottom: 20px;
     }
     
-    /* Prompter Card Styling */
-    .prompter-box {
-        background: #161B22;
-        border: 1px solid #30363D;
-        border-radius: 16px;
-        padding: 24px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        margin-top: 15px;
-        margin-bottom: 20px;
-    }
-    
-    .badge-hook {
-        background: rgba(234, 179, 8, 0.15);
-        color: #FACC15;
-        font-weight: 700;
-        font-size: 0.75rem;
-        padding: 4px 10px;
-        border-radius: 20px;
-        display: inline-block;
-        letter-spacing: 0.5px;
-        margin-bottom: 8px;
-    }
-    
-    .badge-script {
-        background: rgba(46, 160, 67, 0.15);
-        color: #3FB950;
-        font-weight: 700;
-        font-size: 0.75rem;
-        padding: 4px 10px;
-        border-radius: 20px;
-        display: inline-block;
-        letter-spacing: 0.5px;
-        margin-bottom: 8px;
-    }
-    
-    .badge-broll {
-        background: rgba(56, 189, 248, 0.15);
-        color: #38BDF8;
-        font-weight: 700;
-        font-size: 0.75rem;
-        padding: 4px 10px;
-        border-radius: 20px;
-        display: inline-block;
-        letter-spacing: 0.5px;
-        margin-bottom: 8px;
-    }
-
-    .hook-display {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #FFFFFF;
-        line-height: 1.4;
-        margin-bottom: 16px;
-    }
-    
-    .script-display {
-        font-size: 1.55rem;
-        font-weight: 700;
-        color: #23C552;
-        line-height: 1.5;
-        letter-spacing: -0.2px;
-        margin-bottom: 16px;
-    }
-    
-    .broll-display {
-        font-size: 0.95rem;
-        color: #8B949E;
-        font-style: italic;
-        line-height: 1.4;
-    }
-
     /* Custom Button & Selectbox */
     .stButton>button {
         background: #238636 !important;
@@ -120,10 +49,6 @@ st.markdown("""
     
     .stButton>button:hover {
         background: #2EA043 !important;
-    }
-    
-    div[data-baseweb="select"] {
-        border-radius: 12px !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -169,7 +94,7 @@ with col_nav2:
     progress_val = str(video_num) + "/35"
     st.metric(label="Progress", value=progress_val)
 
-# Demo Data Skrip
+# Data Skrip Contoh
 sample_hooks = {
     1: '"Muka pas-pasan, motor biasa... eh helm bau apek pula!"',
     2: '"Solat mau adem, tapi peci bekas keringat minggu lalu?"',
@@ -192,8 +117,17 @@ current_hook = sample_hooks.get(video_num, '"Muka pas-pasan, penampilan biasa...
 current_script = sample_scripts.get(video_num, '"Emang bener-bener susah dibilangin. Muka biasa aja gak apa, yang penting helm & apparel lu tetep wangi segar NOBAU DeoFresh biar bebas ilfeel!"')
 current_broll = sample_brolls.get(video_num, 'Kamera POV: Tangan peragakan semprot NOBAU ke objek produk.')
 
-# Tampilan Card Prompter Pro
-st.markdown(f"""
-    <div class="prompter-box">
-        <span class="badge-hook">📌 HOOK TEKS LAYAR (0-3 DETIK)</span>
-        <div class="hook-display">{current
+# Render Tampilan Teleprompter yang Aman Tanpa Error HTML
+st.subheader("📌 HOOK TEKS LAYAR (0-3 DETIK)")
+st.warning(current_hook)
+
+st.subheader("🗣️ SKRIP TELEPROMPTER (BACA DI KAMERA)")
+st.success(current_script)
+
+st.subheader("📹 PANDUAN B-ROLL KAMERA BELAKANG")
+st.info(current_broll)
+
+st.divider()
+
+# Quick Copy Helper
+st.text_copy_button("📋 Copy Teks Skrip Ini", current_script, use_container_width=True)
