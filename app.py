@@ -166,4 +166,34 @@ col_nav1, col_nav2 = st.columns([3, 1])
 with col_nav1:
     video_num = st.slider("Pilih Video:", 1, 35, 1)
 with col_nav2:
-    st.metric(label="Progress", value=f"{
+    progress_val = str(video_num) + "/35"
+    st.metric(label="Progress", value=progress_val)
+
+# Demo Data Skrip
+sample_hooks = {
+    1: '"Muka pas-pasan, motor biasa... eh helm bau apek pula!"',
+    2: '"Solat mau adem, tapi peci bekas keringat minggu lalu?"',
+    3: '"Nongkrong udah rapi, pas lepas sepatu... BAU NAGA PULA!"'
+}
+
+sample_scripts = {
+    1: '"Emang bener-bener cowok tuh susah dibilangin. Muka udah pas-pasan, motor biasa aja, eh yang paling parah: HELM BAU APEK PULA! Makanya sebelum doi ilfeel, gercep semprot NOBAU DeoFresh dulu bro!"',
+    2: '"Niatnya mau ibadah biar makin adem, tapi yang bikin gak khusyuk tuh peci bekas keringat minggu lalu. Muka pas-pasan gak apa, yang penting peci wangi segar NOBAU biar ibadah makin tenang."',
+    3: '"Cewek tuh paling males kalau nongkrong bareng cowok yang gak peka. Outfit udah rapi, tapi pas lepas sepatu: BAU NAGA PULA! Untung selalu sedia NOBAU DeoFresh, sekali semprot bau naga langsung ngacir."'
+}
+
+sample_brolls = {
+    1: 'Kamera POV: Tangan kanan pegang helm, tangan kiri semprot NOBAU 2x ke pad busa.',
+    2: 'Kamera Close-Up: Tangan usap permukaan peci lalu semprotkan NOBAU dari jarak 10cm.',
+    3: 'Kamera Flat Lay: Sepatu ditaruh di lantai, semprot NOBAU ke dalam lubang sepatu.'
+}
+
+current_hook = sample_hooks.get(video_num, '"Muka pas-pasan, penampilan biasa... eh bau apek pula!"')
+current_script = sample_scripts.get(video_num, '"Emang bener-bener susah dibilangin. Muka biasa aja gak apa, yang penting helm & apparel lu tetep wangi segar NOBAU DeoFresh biar bebas ilfeel!"')
+current_broll = sample_brolls.get(video_num, 'Kamera POV: Tangan peragakan semprot NOBAU ke objek produk.')
+
+# Tampilan Card Prompter Pro
+st.markdown(f"""
+    <div class="prompter-box">
+        <span class="badge-hook">📌 HOOK TEKS LAYAR (0-3 DETIK)</span>
+        <div class="hook-display">{current
