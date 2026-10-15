@@ -1,69 +1,169 @@
 import streamlit as st
 
-# 1. Konfigurasi Tampilan Web (Mobile Friendly)
+# 1. Konfigurasi Tampilan Web (Mobile First / Dark Mode Studio)
 st.set_page_config(
     page_title="NOBAU Script Engine",
     page_icon="🧪",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# Custom Styling biar enak dibaca di Teleprompter HP
+# Custom CSS Pro - Khusus Teleprompter HP
 st.markdown("""
     <style>
-    .stApp { background-color: #0e1117; color: #ffffff; }
-    .teleprompter-card {
-        background-color: #1e222d;
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 15px;
-        border-left: 6px solid #00e676;
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+    
+    html, body, [class*="css"] {
+        font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .hook-text { color: #ffeb3b; font-weight: bold; font-size: 1.1em; }
-    .script-text { color: #ffffff; font-size: 1.4em; line-height: 1.6; font-weight: 600; }
-    .broll-text { color: #b0bec5; font-size: 0.95em; font-style: italic; }
+    
+    .stApp {
+        background: #090C10;
+        color: #F0F6FC;
+    }
+    
+    /* Header Branding */
+    .brand-title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(90deg, #2EA043 0%, #3FB950 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0px;
+    }
+    .brand-sub {
+        font-size: 0.85rem;
+        color: #8B949E;
+        margin-bottom: 20px;
+    }
+    
+    /* Prompter Card Styling */
+    .prompter-box {
+        background: #161B22;
+        border: 1px solid #30363D;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .badge-hook {
+        background: rgba(234, 179, 8, 0.15);
+        color: #FACC15;
+        font-weight: 700;
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+    }
+    
+    .badge-script {
+        background: rgba(46, 160, 67, 0.15);
+        color: #3FB950;
+        font-weight: 700;
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+    }
+    
+    .badge-broll {
+        background: rgba(56, 189, 248, 0.15);
+        color: #38BDF8;
+        font-weight: 700;
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+    }
+
+    .hook-display {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #FFFFFF;
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+    
+    .script-display {
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: #23C552;
+        line-height: 1.5;
+        letter-spacing: -0.2px;
+        margin-bottom: 16px;
+    }
+    
+    .broll-display {
+        font-size: 0.95rem;
+        color: #8B949E;
+        font-style: italic;
+        line-height: 1.4;
+    }
+
+    /* Custom Button & Selectbox */
+    .stButton>button {
+        background: #238636 !important;
+        color: #FFFFFF !important;
+        border-radius: 12px !important;
+        border: none !important;
+        font-weight: 700 !important;
+        height: 48px !important;
+    }
+    
+    .stButton>button:hover {
+        background: #2EA043 !important;
+    }
+    
+    div[data-baseweb="select"] {
+        border-radius: 12px !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
-# 2. Header Dashboard
-st.title("🧪 NOBAU Script Engine")
-st.caption("Mesin Riset & Dashboard Teleprompter 35 Video TikTok Harian")
+# 2. Header Dashboard Studio
+st.markdown('<p class="brand-title">🧪 NOBAU Script Engine Pro</p>', unsafe_allow_html=True)
+st.markdown('<p class="brand-sub">Dashboard Teleprompter 35 Video QTY Harian • Gen-Z Self-Roast Studio</p>', unsafe_allow_html=True)
 
-st.markdown("🔗 **[Klik di sini untuk buka Google Sheets Master](https://docs.google.com/spreadsheets/d/1N1MjCYzpzK-QPczJv9Yy8W9AskqXkdm76stIiCB7bag/edit)**")
+# Link Quick Access
+col_link1, col_link2 = st.columns(2)
+with col_link1:
+    st.markdown("📊 [**Buka Master Google Sheets**](https://docs.google.com/spreadsheets/d/1N1MjCYzpzK-QPczJv9Yy8W9AskqXkdm76stIiCB7bag/edit)")
+with col_link2:
+    st.markdown("🎬 **Target: 35 Video / Hari**")
 
 st.divider()
 
-# 3. Mode Pilihan Varian
+# 3. Control Panel Generator
+st.caption("⚙️ PANEL KONTROL BATCH HARIAN")
 batch_choice = st.selectbox(
-    "📌 Pilih Varian Fokus Hari Ini:",
+    "Pilih Varian Fokus Hari Ini:",
     [
-        "Batch 1: Spray Helm, Peci, & Outfit/Sepatu",
-        "Batch 2: Spray Ketiak, Bau Kaki, & Ruangan/Asap",
-        "Batch 3: Otomotif (Jaket, Gloves, Bagasi, Helm Ojol)",
-        "Batch 4: Mix All Categories (Random Fresh Trends)"
+        "🔥 Batch 1: Spray Helm, Peci, & Outfit/Sepatu",
+        "💨 Batch 2: Spray Ketiak, Bau Kaki, & Ruangan/Asap",
+        "🏍️ Batch 3: Otomotif (Jaket, Gloves, Bagasi, Helm Ojol)",
+        "🎲 Batch 4: Mix All Categories (Random Fresh Trends)"
     ]
 )
 
-if st.button("🚀 Generate 35 Skrip Baru (Update ke Sheets)", type="primary", use_container_width=True):
-    st.success(f"✅ Skrip baru untuk '{batch_choice}' berhasil diriset dan di-update ke Google Sheets Master!")
+if st.button("🚀 GENERATE 35 SKRIP BARU (UPDATE SHEETS)", use_container_width=True):
+    st.toast("Riset tren Gen-Z selesai! 35 Skrip baru telah diperbarui di Google Sheets.", icon="✅")
 
 st.divider()
 
-# 4. Mode Baca Teleprompter di HP
-st.subheader("📱 Mode Baca Teleprompter HP")
-st.info("💡 Buka web ini di HP, pilih nomor video, lalu baca di atas kamera belakang HP kamu.")
+# 4. Teleprompter Studio Player
+st.caption("📱 TELEPROMPTER PLAYER (DIBACA PAS REKAM KAMERA BELAKANG)")
 
-video_num = st.slider("Pilih Nomor Video (1 - 35):", 1, 35, 1)
-
-# Tampilan Kartu Prompter
-st.markdown(f"""
-    <div class="teleprompter-card">
-        <p class="hook-text">📌 HOOK TEKS LAYAR (0-3 Detik):</p>
-        <p style="font-size: 1.2em; font-weight: bold;">"Muka pas-pasan, motor biasa... eh helm bau apek pula!"</p>
-        <hr style="border-color: #374151;">
-        <p class="hook-text">🗣️ SKRIP TELEPROMPTER (BACA DI KAMERA BELAKANG):</p>
-        <p class="script-text">"Emang bener-bener cowok tuh susah dibilangin. Muka udah pas-pasan, motor biasa aja, eh yang paling parah: HELM BAU APEK PULA! Makanya sebelum doi ilfeel, gercep semprot NOBAU DeoFresh dulu bro!"</p>
-        <hr style="border-color: #374151;">
-        <p class="broll-text">📹 PANDUAN B-ROLL: Kamera POV - Tangan peragakan semprot NOBAU ke dalam pad helm.</p>
-    </div>
-""", unsafe_allow_html=True)
+# Navigation Slider + Counter
+col_nav1, col_nav2 = st.columns([3, 1])
+with col_nav1:
+    video_num = st.slider("Pilih Video:", 1, 35, 1)
+with col_nav2:
+    st.metric(label="Progress", value=f"{
